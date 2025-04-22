@@ -1,3 +1,4 @@
+import HOST from "./production.js";
 
 document.getElementById('loginForm').addEventListener('submit', function(e) {
     e.preventDefault();
@@ -6,7 +7,7 @@ document.getElementById('loginForm').addEventListener('submit', function(e) {
     const password = document.getElementById('password').value;
     
    // In your login success handler
-fetch('http://localhost:3000/admin-login', {
+fetch(`${HOST}/admin-login`, {
     method: 'POST',
     headers: {
         'Content-Type': 'application/json'

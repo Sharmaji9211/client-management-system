@@ -1,3 +1,4 @@
+import HOST from "./production.js";
 
 // Global variables
 let currentUser = null;
@@ -83,7 +84,7 @@ function showSection(sectionId) {
 
 // Dashboard functions
 function loadDashboardData() {
-    fetch('http://localhost:3000/users')
+    fetch('${HOST}/users')
         .then(response => response.json())
         .then(users => {
             document.getElementById('totalUsers').textContent = users.length;
@@ -95,7 +96,7 @@ function loadDashboardData() {
 
 // Users Management functions
 function loadUsersTable() {
-    fetch('http://localhost:3000/users')
+    fetch('${HOST}/users')
         .then(response => response.json())
         .then(users => {
             const tableBody = document.getElementById('usersTableBody');
@@ -136,7 +137,7 @@ function showAddUserForm() {
 }
 
 function editUser(userId) {
-    fetch(`http://localhost:3000/users/${userId}`)
+    fetch(`${HOST}/users/${userId}`)
         .then(response => response.json())
         .then(user => {
             document.getElementById('userId').value = user.id;
@@ -168,7 +169,7 @@ function handleUserFormSubmit(e) {
     
     if (userId) {
         // Update existing user
-        fetch(`http://localhost:3000/users/${userId}`, {
+        fetch(`${HOST}/users/${userId}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json'
@@ -186,7 +187,7 @@ function handleUserFormSubmit(e) {
         });
     } else {
         // Create new user
-        fetch('http://localhost:3000/register', {
+        fetch('${HOST}/register', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -208,7 +209,7 @@ function handleUserFormSubmit(e) {
 
 function deleteUser(userId) {
     if (confirm('Are you sure you want to delete this user?')) {
-        fetch(`http://localhost:3000/users/${userId}`, {
+        fetch(`${HOST}/users/${userId}`, {
             method: 'DELETE'
         })
         .then(response => response.json())
@@ -245,7 +246,7 @@ function handleProfileUpdate(e) {
         password: document.getElementById('profilePassword').value || undefined
     };
     
-    fetch(`http://localhost:3000/users/${currentUser.id}`, {
+    fetch(`${HOST}/users/${currentUser.id}`, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json'

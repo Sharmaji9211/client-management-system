@@ -1,3 +1,5 @@
+import HOST from "./production.js";
+
 const rg= document.getElementById('register-form');
 // console.log(rg);
 
@@ -24,7 +26,7 @@ rg.addEventListener('submit' ,(e)=>{
 
      
     
-                fetch("http://localhost:3000/admin-register",
+                fetch(`${HOST}/admin-register`,
                     {
                         method:'POST',
                         headers:{
